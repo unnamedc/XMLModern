@@ -1,47 +1,37 @@
-﻿using ModernUi.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TestXMLModern.Core;
 
 namespace TestXMLModern.MVVM.ViewModel
 {
-    class MainViewModel : ObservableObject
+    public class MainViewModel : ObservableObject
     {
-        public RelayCommand HomeViewCommand { get; set; }
-
-        public RelayCommand DiscoveryViewCommand { get; set; }
+        // Свойства и команды для навигации
         public HomeViewModel HomeVM { get; set; }
+        public TimerViewModel TimerVM { get; set; }
+        public TasksViewModel TasksVM { get; set; }
 
-        public DiscoveryViewModel DiscoveryVM { get; set; }
+        public RelayCommand HomeViewCommand { get; set; }
+        public RelayCommand TimerViewCommand { get; set; }
+        public RelayCommand TasksViewCommand { get; set; }
+
         private object _currentView;
-
         public object CurrentView
         {
             get { return _currentView; }
-            set 
-            {
-                _currentView = value;
-                OnPropertyChanged();
-            }
+            set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public MainViewModel() 
-        { 
+        public MainViewModel()
+        {
+            // Инициализация ViewModel'ов
             HomeVM = new HomeViewModel();
-            DiscoveryVM = new DiscoveryViewModel();
+            TimerVM = new TimerViewModel();
+            TasksVM = new TasksViewModel();
             CurrentView = HomeVM;
 
-            HomeViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = HomeVM;
-            });
-
-            DiscoveryViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = DiscoveryVM;
-            });
+            // Настройка команд
+            HomeViewCommand = new RelayCommand(o => CurrentView = HomeVM);
+            TimerViewCommand = new RelayCommand(o => CurrentView = TimerVM);
+            TasksViewCommand = new RelayCommand(o => CurrentView = TasksVM);
         }
     }
 }

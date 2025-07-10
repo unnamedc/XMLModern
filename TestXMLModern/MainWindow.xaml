@@ -8,17 +8,32 @@
         mc:Ignorable="d"
         Height="600" Width="920"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         Background="Transparent"
         AllowsTransparency="True">
-
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
-        
-    <Border Background="#272537" CornerRadius="20">
+    <!-- WindowChrome позволяет перетаскивать и изменять размер окна без рамки -->
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="10"
+                      CaptionHeight="75"
+                      CornerRadius="0"
+                      GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Border Background="#272537" 
+            CornerRadius="20"
+            BorderThickness="2">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#4A485F" Offset="0"/>
+                <GradientStop Color="#784ff2" Offset="0.75"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -30,44 +45,42 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Elysian"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Foreground="White"
-                       FontSize="22"
-                       Margin="20, 0, 0, 0"
-                       FontFamily="/Fonts/#Poppins"/>
+            <!-- Верхняя панель -->
+            <Grid Grid.ColumnSpan="2">
+                <TextBlock Text="Productivity"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           FontSize="22"
+                           Margin="20, 0, 0, 0"
+                           FontFamily="/Fonts/#Poppins"/>
+
+                <!-- Кнопки управления окном -->
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Top"
+                            Margin="0,10,10,0">
+                    <Button Content="—" 
+                        Click="MinimizeButton_Click"
+                        Style="{StaticResource WindowControlButton}"
+                        WindowChrome.IsHitTestVisibleInChrome="True"/>
+
+                    <Button Content="✕" 
+                        Click="CloseButton_Click"
+                        Style="{StaticResource WindowControlButton}"
+                        Margin="5,0,0,0"
+                        WindowChrome.IsHitTestVisibleInChrome="True"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Меню навигации -->
             <StackPanel Grid.Row="1">
-                <RadioButton Content="Button"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             IsChecked="True"
-                             Command="{Binding HomeViewCommand}"/>
-
-                <RadioButton Content="Discovery"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                              Command="{Binding DiscoveryViewCommand}"/>
-
-                <RadioButton Content="Featured"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Menu" Height="50" Style="{StaticResource MenuButtonTheme}" IsChecked="True" Command="{Binding HomeViewCommand}"/>
+                <RadioButton Content="Timer" Height="50" Style="{StaticResource MenuButtonTheme}" Command="{Binding TimerViewCommand}"/>
+                <RadioButton Content="Tasks" Height="50" Style="{StaticResource MenuButtonTheme}" Command="{Binding TasksViewCommand}"/>
             </StackPanel>
 
-            <TextBox Width="250"
-                     Height="40"
-                     VerticalAlignment="Center"
-                     HorizontalAlignment="Left"
-                     Margin="5"
-                     Grid.Column="1"
-                     Style="{StaticResource ModernTextbox}"/>
-
+            <!-- Основной контент -->
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Margin="10"

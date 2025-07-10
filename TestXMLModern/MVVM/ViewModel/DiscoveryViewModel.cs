@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TestXMLModern.Core;
 
 namespace TestXMLModern.MVVM.ViewModel
 {
-    internal class DiscoveryViewModel
+    // Make sure the class is public
+    public class DiscoveryViewModel : ObservableObject
     {
+        // Add any properties or commands needed for this view here
+        public DiscoveryViewModel()
+        {
+
+        }
     }
 }
