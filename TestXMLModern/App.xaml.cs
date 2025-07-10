@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace TestXMLModern
 {
@@ -13,5 +7,6 @@ namespace TestXMLModern
     /// </summary>
     public partial class App : Application
     {
+        // This file can be left empty now that the database logic has been removed.
     }
 }

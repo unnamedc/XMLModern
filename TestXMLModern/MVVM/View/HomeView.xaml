@@ -4,108 +4,98 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestXMLModern.MVVM.View"
+             xmlns:viewModel="clr-namespace:TestXMLModern.MVVM.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             FontFamily="/Fonts/#Poppins">
+
+    <UserControl.DataContext>
+        <viewModel:HomeViewModel/>
+    </UserControl.DataContext>
+
     <StackPanel>
-        <TextBlock Text="Discover"
-                   Foreground="White"
-                   FontSize="28"
-                   HorizontalAlignment="Left"
-                   Margin="0, 0, 0, 20"
-                   FontFamily="/Fonts/#Poppins"/>
+        <TextBlock Text="Discover" Foreground="White" FontSize="28" HorizontalAlignment="Left" Margin="0,0,0,20"/>
 
         <StackPanel Orientation="Horizontal">
-            <Border Width="400"
-                    Height="200">
+            <Border Width="450" Height="200">
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0, 0" EndPoint="1,2">
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                         <GradientStop Color="#5bc3ff" Offset="0.0"/>
                         <GradientStop Color="#3aa0ff" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-
                 <Border.Clip>
-                    <RectangleGeometry RadiusX="10"
-                                       RadiusY="10"
-                                       Rect="0,0,400,200"/>
+                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,430,200"/>
                 </Border.Clip>
-
                 <Grid>
                     <StackPanel>
-                        <TextBlock Text="World leader&#x0a;in global finance"
-                                   Foreground="White"
-                                   FontSize="28"
-                                   Margin="20,10,10,0"
-                                   FontFamily="/Fonts/#Poppins"/>
-
-                        <TextBlock Text="Get started today!"
-                                   Foreground="White"
-                                   FontSize="28"
-                                   Margin="20,10,10,0"
-                                   FontFamily="/Fonts/#Poppins"/>
-
+                        <TextBlock Text="Start your&#x0a;productivity" Foreground="White" FontSize="28" Margin="20,10,10,0"/>
+                        <TextBlock Text="Let's get things done!" Foreground="White" FontSize="18" Margin="20,10,10,0" Opacity="0.8"/>
                     </StackPanel>
-
-                    <Image Width="250"
-                           Height="250"
-                           Source="/Images/man.png"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center" Margin="200,0,0,0"/>
+                    <Image Width="245" Height="250" Source="/Images/man.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="200,0,0,0"/>
                 </Grid>
             </Border>
-
-            <Border Width="200"
-                    Height="200"
-                    CornerRadius="10"
-                    Margin="45, 0, 0, 0">
-
+            <Border Width="200" Height="200" CornerRadius="10">
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0, 0" EndPoint="1,2">
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                         <GradientStop Color="#ffc554" Offset="0.0"/>
                         <GradientStop Color="#ffb73a" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Pomodoro Timer" Foreground="White" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBlock Text="{Binding TimeDisplay}" Foreground="White" FontSize="42" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
+                        <Button Content="▶" Command="{Binding StartTimerCommand}" Foreground="White" Background="Transparent" BorderThickness="0" FontSize="18"/>
+                        <Button Content="⏸" Command="{Binding PauseTimerCommand}" Foreground="White" Background="Transparent" BorderThickness="0" FontSize="18" Margin="10,0,10,0"/>
+                        <Button Content="⟳" Command="{Binding ResetTimerCommand}" Foreground="White" Background="Transparent" BorderThickness="0" FontSize="18"/>
+                    </StackPanel>
+                </StackPanel>
             </Border>
         </StackPanel>
 
-        <StackPanel>
-            <TextBlock Text="Most Watched"
-                       Foreground="White"
-                       FontSize="20"
-                       HorizontalAlignment="Left"
-                       Margin="0,0,0,10"/>
+        <StackPanel Margin="0,20,0,0">
+            <Border Width="650" Height="155" CornerRadius="10" HorizontalAlignment="Left">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop x:Name="GradientStop1" Color="#844eff" Offset="0.0" />
+                        <GradientStop x:Name="GradientStop2" Color="#4e99ff" Offset="0.25" />
+                        <GradientStop x:Name="GradientStop3" Color="#5bc3ff" Offset="0.75" />
+                        <GradientStop x:Name="GradientStop4" Color="#844eff" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                <DoubleAnimation Storyboard.TargetName="GradientStop1"
+                                                 Storyboard.TargetProperty="Offset"
+                                                 From="0.0" To="0.6" Duration="0:0:5"/>
+                                <DoubleAnimation Storyboard.TargetName="GradientStop2"
+                                                 Storyboard.TargetProperty="Offset"
+                                                 From="0.25" To="0.85" Duration="0:0:5"/>
+                                <DoubleAnimation Storyboard.TargetName="GradientStop3"
+                                                 Storyboard.TargetProperty="Offset"
+                                                 From="0.75" To="0.15" Duration="0:0:5"/>
+                                <DoubleAnimation Storyboard.TargetName="GradientStop4"
+                                                 Storyboard.TargetProperty="Offset"
+                                                 From="1.0" To="0.4" Duration="0:0:5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>
 
-            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Relax..." 
+                           Foreground="White"
+                           FontSize="32"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="4" Color="Black" Opacity="0.5"/>
+                    </TextBlock.Effect>
+                </TextBlock>
 
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="Margin" Value="15,0,0,0"/>
-                    </Style>
-                </StackPanel.Resources>
-                
-                <Border Width="150"
-                        Height="150"
-                        Background="#844eff"
-                        CornerRadius="10"
-                        Margin="0"/>
-
-                <Border Width="150"
-                        Height="150"
-                        Background="#4e99ff"
-                        CornerRadius="10"/>
-
-                <Border Width="150"
-                        Height="150"
-                        Background="#4ff911"
-                        CornerRadius="10"/>
-
-                <Border Width="150"
-                        Height="150"
-                        Background="#ecff4e"
-                        CornerRadius="10"/>
-
-            </StackPanel>
+            </Border>
         </StackPanel>
     </StackPanel>
 </UserControl>

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using System;
 
-namespace ModernUi.Core
+namespace TestXMLModern.Core // Changed from TestXMLModern.MVVM.Core
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action<object> _execute;
-        private readonly Func<object, bool> _canExecute;
+        private Action<object> _execute;
+        private Func<object, bool> _canExecute;
 
         public event EventHandler CanExecuteChanged
         {
@@ -16,7 +16,7 @@ namespace ModernUi.Core
 
         public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _execute = execute;
             _canExecute = canExecute;
         }
 
